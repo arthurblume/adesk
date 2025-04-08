@@ -33,8 +33,6 @@ const getHints = ({
   device,
   app,
 }: HintViewerProps): null | string | string[] => {
-  return null;
-
   const { activeTool, isResizing, isRotating, lastPointerDownWith } = appState;
   const multiMode = appState.multiElement !== null;
 
