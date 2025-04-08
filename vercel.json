@@ -68,7 +68,4 @@
   "buildCommand": "yarn build",
   "outputDirectory": "excalidraw/build",
   "installCommand": "yarn install",
-  "rewrites": [
-    { "source": "/adesk(/.*)?", "destination": "/" }
-  ]
 }
