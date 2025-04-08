@@ -78,7 +78,7 @@ export default defineConfig(({ mode }) => {
       ],
     },
     build: {
-      outDir: "excalidraw-app/build",
+      outDir: "build",
       chunkSizeWarningLimit: 20000,
       rollupOptions: {
         output: {
