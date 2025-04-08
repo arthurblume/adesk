@@ -1,0 +1,7 @@
+{
+  "buildCommand": "yarn build",
+  "outputDirectory": "build",
+  "rewrites": [
+    { "source": "/adesk(/.*)?", "destination": "/" }
+  ]
+}
