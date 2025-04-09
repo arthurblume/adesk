@@ -1164,3 +1164,69 @@ const ExcalidrawApp = () => {
 };
 
 export default ExcalidrawApp;
+
+
+//////////////////////////////////////////////////
+// 2025-04-09: Temporary, experimental functions that can call ChatGPT.
+
+declare global {
+  interface Window {
+    initGPT: () => void;
+    callGPT: (prompt: string) => Promise<string | undefined>;
+    shutdownGPT: () => void;
+  }
+}
+
+(() => {
+  const STORAGE_KEY = "openai_api_key";
+
+  window.initGPT = () => {
+    let apiKey = localStorage.getItem(STORAGE_KEY);
+    if (!apiKey) {
+      apiKey = prompt("Enter your OpenAI API key:");
+      if (apiKey) {
+        localStorage.setItem(STORAGE_KEY, apiKey);
+        console.log("API key saved.");
+      } else {
+        console.warn("No API key entered.");
+      }
+    } else {
+      console.log("API key already initialized.");
+    }
+  };
+
+  window.callGPT = async (prompt: string): Promise<string | undefined> => {
+    const apiKey = localStorage.getItem(STORAGE_KEY);
+    if (!apiKey) {
+      console.error("API key not found. Call initGPT() first.");
+      return;
+    }
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("GPT call failed:", await response.text());
+      return;
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data.choices?.[0]?.message?.content?.trim();
+  };
+
+  window.shutdownGPT = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    console.log("API key removed.");
+  };
+})();
