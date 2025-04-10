@@ -74,6 +74,24 @@ import type {
   AppClassProperties,
 } from "../types";
 
+window.addEventListener("message", (event) => {
+  if (
+    event.origin !== "http://localhost:3000" &&
+    event.origin !== "https://adesk.arthurblume.com"
+  ) {
+    return;
+  }
+  if (event.data.type !== "TABS_LIST") {
+    return;
+  }
+
+  console.log(event.data.tabs);
+});
+
+const onGetOpenTabs = () => {
+  window.postMessage({ type: "CALL_FOR_TABS" }, "*");
+};
+
 interface LayerUIProps {
   actionManager: ActionManager;
   appState: UIAppState;
@@ -294,6 +312,12 @@ const LayerUI = ({
                               checked={appState.activeTool.locked}
                               onChange={onLockToggle}
                               title={t("toolBar.lock")}
+                            />
+
+                            <LockButton
+                              checked={false}
+                              onChange={onGetOpenTabs}
+                              title={"Get open tabs"}
                             />
 
                             <div className="App-toolbar__divider" />

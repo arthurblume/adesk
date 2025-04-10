@@ -968,6 +968,25 @@ const ExcalidrawWrapper = () => {
               },
             },
             {
+              label: t("labels.liveCollaboration"),
+              category: DEFAULT_CATEGORIES.app,
+              keywords: [
+                "team",
+                "multiplayer",
+                "share",
+                "public",
+                "session",
+                "invite",
+              ],
+              icon: usersIcon,
+              perform: () => {
+                setShareDialogState({
+                  isOpen: true,
+                  type: "collaborationOnly",
+                });
+              },
+            },
+            {
               label: t("roomDialog.button_stopSession"),
               category: DEFAULT_CATEGORIES.app,
               predicate: () => !!collabAPI?.isCollaborating(),
@@ -1165,7 +1184,6 @@ const ExcalidrawApp = () => {
 
 export default ExcalidrawApp;
 
-
 //////////////////////////////////////////////////
 // 2025-04-09: Temporary, experimental functions that can call ChatGPT.
 
@@ -1206,7 +1224,7 @@ declare global {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         model: "gpt-4o",
