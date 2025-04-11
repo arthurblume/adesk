@@ -76,7 +76,7 @@ import type {
 
 window.addEventListener("message", (event) => {
   if (
-    event.origin !== "http://localhost:3000" &&
+    !event.origin.startsWith("http://localhost:") &&
     event.origin !== "https://adesk.arthurblume.com"
   ) {
     return;
