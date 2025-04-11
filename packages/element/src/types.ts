@@ -205,6 +205,7 @@ export type ExcalidrawRectanguloidElement =
 export type ExcalidrawElement =
   | ExcalidrawGenericElement
   | ExcalidrawTextElement
+  | ExcalidrawLinkElement
   | ExcalidrawLinearElement
   | ExcalidrawArrowElement
   | ExcalidrawFreeDrawElement
@@ -253,6 +254,18 @@ export type ExcalidrawTextElement = _ExcalidrawElementBase &
      *  with font size (using `getLineHeightInPx` helper).
      */
     lineHeight: number & { _brand: "unitlessLineHeight" };
+  }>;
+
+export type ExcalidrawLinkElement = _ExcalidrawElementBase &
+  Readonly<{
+    type: "link";
+    url: string;
+    title: string;
+    favIconUrl: string;
+
+    // Optional rendering dimensions — will default if not set
+    width?: number;
+    height?: number;
   }>;
 
 export type ExcalidrawBindableElement =
