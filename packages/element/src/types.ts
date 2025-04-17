@@ -192,6 +192,7 @@ export type ExcalidrawRectanguloidElement =
   | ExcalidrawRectangleElement
   | ExcalidrawImageElement
   | ExcalidrawTextElement
+  | ExcalidrawLinkChipElement
   | ExcalidrawFreeDrawElement
   | ExcalidrawIframeLikeElement
   | ExcalidrawFrameLikeElement
@@ -205,6 +206,7 @@ export type ExcalidrawRectanguloidElement =
 export type ExcalidrawElement =
   | ExcalidrawGenericElement
   | ExcalidrawTextElement
+  | ExcalidrawLinkChipElement
   | ExcalidrawLinearElement
   | ExcalidrawArrowElement
   | ExcalidrawFreeDrawElement
@@ -260,6 +262,7 @@ export type ExcalidrawBindableElement =
   | ExcalidrawDiamondElement
   | ExcalidrawEllipseElement
   | ExcalidrawTextElement
+  | ExcalidrawLinkChipElement
   | ExcalidrawImageElement
   | ExcalidrawIframeElement
   | ExcalidrawEmbeddableElement
@@ -309,6 +312,15 @@ export type Arrowhead =
   | "crowfoot_one"
   | "crowfoot_many"
   | "crowfoot_one_or_many";
+
+export type ExcalidrawLinkChipElement = _ExcalidrawElementBase &
+  Readonly<{
+    type: "linkchip";
+    url: string;
+    label: string;
+    labelIsCustom?: boolean;
+    faviconUrl?: string;
+  }>;
 
 export type ExcalidrawLinearElement = _ExcalidrawElementBase &
   Readonly<{

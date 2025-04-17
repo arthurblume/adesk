@@ -29,6 +29,7 @@ export const distanceToBindableElement = (
     case "rectangle":
     case "image":
     case "text":
+    case "linkchip":
     case "iframe":
     case "embeddable":
     case "frame":

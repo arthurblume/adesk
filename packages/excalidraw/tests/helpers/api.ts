@@ -362,6 +362,8 @@ export class API {
       case "magicframe":
         element = newMagicFrameElement({ ...base, width, height });
         break;
+      case "linkchip":
+        throw new Error("API.createElement: 'linkchip' element not supported in test helpers");        
       default:
         assertNever(
           type,

@@ -8,6 +8,7 @@ import type { Bounds } from "./bounds";
 import type {
   ExcalidrawElement,
   ExcalidrawTextElement,
+  ExcalidrawLinkChipElement,
   ExcalidrawEmbeddableElement,
   ExcalidrawLinearElement,
   ExcalidrawBindableElement,
@@ -66,6 +67,12 @@ export const isTextElement = (
   element: ExcalidrawElement | null,
 ): element is ExcalidrawTextElement => {
   return element != null && element.type === "text";
+};
+
+export const isLinkChipElement = (
+  element: ExcalidrawElement | null,
+): element is ExcalidrawLinkChipElement => {
+  return element != null && element.type === "linkchip";
 };
 
 export const isFrameElement = (
@@ -159,6 +166,7 @@ export const isBindableElement = (
       element.type === "embeddable" ||
       element.type === "frame" ||
       element.type === "magicframe" ||
+      element.type === "linkchip" ||
       (element.type === "text" && !element.containerId))
   );
 };
@@ -175,6 +183,7 @@ export const isRectanguloidElement = (
       element.type === "embeddable" ||
       element.type === "frame" ||
       element.type === "magicframe" ||
+      element.type === "linkchip" ||
       (element.type === "text" && !element.containerId))
   );
 };
@@ -189,6 +198,7 @@ export const isRectangularElement = (
     (element.type === "rectangle" ||
       element.type === "image" ||
       element.type === "text" ||
+      element.type === "linkchip" ||
       element.type === "iframe" ||
       element.type === "embeddable" ||
       element.type === "frame" ||
@@ -220,6 +230,7 @@ export const isExcalidrawElement = (
   }
   switch (type) {
     case "text":
+    case "linkchip":
     case "diamond":
     case "rectangle":
     case "iframe":

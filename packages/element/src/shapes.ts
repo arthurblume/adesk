@@ -58,6 +58,7 @@ export const getElementShape = <Point extends GlobalPoint | LocalPoint>(
     case "image":
     case "iframe":
     case "text":
+    case "linkchip":
     case "selection":
       return getPolygonShape(element);
     case "arrow":
